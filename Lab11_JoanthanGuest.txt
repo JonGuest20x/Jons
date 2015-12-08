@@ -1,0 +1,113 @@
+import java.util.*;
+import java.util.ArrayList;
+public class Lab11MovieApp {
+
+		   static Scanner sc1 = new Scanner(System.in);
+
+		   public static void main(String[] args)
+		  
+		   {
+			   String choice = "y";
+
+		       System.out.println("Welcome to the Movie List Application!");
+
+		       ArrayList<Movie> movies = getMovies();      //  The array list
+
+		       System.out.println("There are " + movies.size() + " movies in the list.\n");
+		       System.out.println("The categories available are : horror, drama, sci fi, animated ");
+
+		       String category;                            // used to search for films in the specific category
+
+		       do
+		       {
+		           category = getString("What category are you interested in? ");
+		           for (Movie m : movies)
+		           {
+		               if (m.category.equalsIgnoreCase(category))
+		                   
+		                   System.out.println(m.title);
+		           }	   System.out.print("Continue? (y/n): ");
+		           
+			        choice = sc1.next();
+			        System.out.println();
+				}
+						
+
+			    
+			    while (!choice.equalsIgnoreCase("n")); 
+					System.out.println("Goodbye");
+		   }
+
+		   public static ArrayList<Movie> getMovies()
+		   {
+		       Movie m;
+		       ArrayList<Movie> movies = new ArrayList<>();
+		       for (int i = 1; i <= 10; i++)
+		       {
+		           m = MovieIO.getMovie(i);
+		           movies.add(m);
+		       }
+		       return movies;
+		   }
+
+		   public static String getString(String prompt)
+		   {
+		       String s = "";
+		       boolean isValid = false;
+
+		       while (!isValid)                        // loops until user enters a non-blank line
+		       {
+		           System.out.print(prompt);
+		           s = sc1.nextLine();
+		           if (!s.equals(""))
+		               isValid = true;
+		       }
+		       return s;
+		   }
+
+	}
+
+
+public class Movie {
+		   public String title;
+	   public String category;
+
+	   public Movie(String title, String category)
+	   {
+	       this.title = title;
+	       this.category = category;
+	   }
+	}
+
+public class MovieIO
+{
+   public static Movie getMovie(int index)
+   {
+       switch (index)
+       {
+           case 1:
+               return new Movie("Selma", "drama");
+           case 2:
+               return new Movie("The Butler", "drama");
+           case 3:
+               return new Movie("Life", "drama");
+           case 4:
+               return new Movie("Dragon BallZ", "animated");
+           case 5:
+               return new Movie("Frozen", "animated");
+           case 6:
+               return new Movie("The Minions", "animated");
+           case 7:
+               return new Movie("House of 1000 Corpses", "Horror");
+           case 8:
+               return new Movie("Momma", "Horror");
+           case 9:
+               return new Movie("The Conjurring", "Horror");
+           case 10:
+               return new Movie("The Matrix", "Sci Fi");
+                     
+           default:
+               return new Movie("No Movie", "");
+       }
+   }
+}
